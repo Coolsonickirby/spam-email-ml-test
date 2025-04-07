@@ -24,8 +24,8 @@ ham_messages = []
 with open(source_path, "r", encoding="utf-8") as csvfile:
     data = csv.reader(csvfile, delimiter=',', quotechar='"')
     for row in data:
-        words = [x.replace("\n", "").strip() for x in row[1].strip().split(" ")]
-        words.extend(x.replace("\n", "").strip() for x in row[2].strip().split(" "))
+        words = [x.strip() for x in row[1].strip().replace("\n", " ").split(" ")]
+        words.extend(x.strip() for x in row[2].strip().replace("\n", " ").split(" "))
         words = list(filter(lambda y: y != "", words))
         if row[3] == "spam":
             spam_messages.append(row[2])
