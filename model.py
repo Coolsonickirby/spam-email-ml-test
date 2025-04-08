@@ -7,7 +7,7 @@ import os
 
 DEBUG = False
 
-class SpamHamLSTM(nn.Module):
+class ModelLSTM(nn.Module):
     def __init__(self, vocab_size, embedding_dim, hidden_dim, n_layers,\
                  drop_out_in_lstm, drop_out, output_size, device):
 
@@ -81,7 +81,7 @@ class SpamHamLSTM(nn.Module):
         return output
 
 
-class Model_wrapper(object):
+class ModelWrapper(object):
   
 	def set_params(self, vocab_size, \
 					   embedding_dim = 100, \
@@ -103,7 +103,7 @@ class Model_wrapper(object):
 		self.device = "cuda" if torch.cuda.is_available() and train_on_gpu else "cpu" 
 
 	def set_model(self, do_print = True):
-		self.model = SpamHamLSTM(self.vocab_size, self.embedding_dim, self.hidden_dim, self.n_layers, \
+		self.model = ModelLSTM(self.vocab_size, self.embedding_dim, self.hidden_dim, self.n_layers, \
 					 self.drop_out_in_lstm, self.drop_out, self.output_size, self.device)
 		self.model = self.model.to(self.device)
 		if do_print:
@@ -184,7 +184,7 @@ class Model_wrapper(object):
 					val_losses.append(np.mean(val_losses_in_itr))
 					if val_min_loss > val_losses[-1]:
 						val_min_loss = val_losses[-1]
-						self.save_state_dict('./', 'lstm_model_saved_at_{}.pth'.format(counter))
+						self.save_state_dict('./', 'Model{}.pth'.format(counter))
 
 					accuracy = np.sum(sums) / np.sum(sizes)
 

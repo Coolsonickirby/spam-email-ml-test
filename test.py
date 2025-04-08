@@ -3,8 +3,8 @@ from torch.autograd import Variable
 from model import *
 from tokenize_dataset import tokenize, words_table
 
-class Predictor(Model_wrapper):
-    def __init__(self, saved_dir='./', file_name = 'lstm_model_saved_at_190.pth'):
+class Predictor(ModelWrapper):
+    def __init__(self, saved_dir='./', file_name = 'Model190.pth'):
         vocab_size = len(words_table)
         self.set_params(vocab_size, train_on_gpu = False)
         self.set_model(do_print = False)
@@ -25,11 +25,12 @@ class Predictor(Model_wrapper):
         output = self.model(seq_tensor, seq_tensor_lengths)
         return output.item()
     
-p = Predictor(file_name="lstm_model_saved_at_90.pth")
+p = Predictor(file_name="Model190.pth")
 
 # The higher the number, the more likely it's ham and not spam
 while True:
     res = input("Enter a sentence: ").strip()
     if res == "":
         exit()
+    print(tokenize(res))
     print(p.predict(res))

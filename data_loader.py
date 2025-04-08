@@ -2,7 +2,7 @@
 
 import torch.utils.data.sampler as data_sampler
 
-class CustomDataLoader(object):
+class DataLoader(object):
   def __init__(self, seq_tensor, seq_lengths, label_tensor, batch_size):
     self.batch_size = batch_size
     self.seq_tensor = seq_tensor
