@@ -8,9 +8,9 @@ from model import *
 vectorized_seqs = []
 with open("tokenized_dataset.json", "r") as f:
     data = json.load(f)
-    vectorized_seqs = data["spam"][:12000]
-    vectorized_seqs.extend(data["ham"][:12000])
-    label_tensor = torch.as_tensor([0 for _ in range(12000)] + [1 for _ in range(12000)], dtype = torch.int16)
+    vectorized_seqs = data["spam"][:16000]
+    vectorized_seqs.extend(data["ham"][:16000])
+    label_tensor = torch.as_tensor([0 for _ in range(16000)] + [1 for _ in range(16000)], dtype = torch.int16)
 
 vocab = []
 with open("words_table.json", "r") as f:
@@ -53,7 +53,7 @@ print(valid_seq_tensor.shape) # torch.Size([1199, 30772])
 print(test_seq_tensor.shape) # torch.Size([601, 30772])
 
 # Instantiate data loaders
-batch_size = 1200
+batch_size = 700
 train_loader = CustomDataLoader(train_seq_tensor, train_seq_lengths, train_label, batch_size)
 valid_loader = CustomDataLoader(valid_seq_tensor, valid_seq_lengths, valid_label, batch_size)
 test_loader = CustomDataLoader(test_seq_tensor, test_seq_lengths, test_label, batch_size)
