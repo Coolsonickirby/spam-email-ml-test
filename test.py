@@ -4,7 +4,7 @@ from model import *
 from tokenize_dataset import tokenize, words_table
 
 class Predictor(Model_wrapper):
-    def __init__(self, saved_dir='./', file_name = 'lstm_model_saved_at_90.pth'):
+    def __init__(self, saved_dir='./', file_name = 'lstm_model_saved_at_190.pth'):
         vocab_size = len(words_table)
         self.set_params(vocab_size, train_on_gpu = False)
         self.set_model(do_print = False)
